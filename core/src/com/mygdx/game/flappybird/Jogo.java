@@ -7,24 +7,36 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Jogo extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture passaro;
-	Texture fundo;
 
 	private  float larguraDispositivo;
 	private  float alturaDispositivo;
+	private float posicaoInicialVerticalPassaro = 0;
+	private float gravidade = 0;
+	private  float variacao = 0;
+
 
 	private int movimentaY = 0;
 	private int movimentaX = 0;
+	private Texture[]passaros;
+	private Texture fundo;
+	private SpriteBatch batch;
+
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		fundo = new Texture("fundo.png"); //informa o item fundo.png.
-		passaro = new Texture("passaro1.png");//informa o passaro.png
+		passaros = new Texture[3];
+		passaros[0] = new Texture("passaro1.png");
+		passaros[1] = new Texture("passaro2.png");
+		passaros[2] = new Texture("passaro3.png");
+		fundo = new Texture("fundo.png");
 
-		//larguraDispositivo = Gdx.graphics.getWidth();
-		//alturaDispositivo = Gdx.graphics.getHeight();
+		//fundo = new Texture("fundo.png"); //informa o item fundo.png.
+		//passaro = new Texture("passaro1.png");//informa o passaro.png
+
+		larguraDispositivo = Gdx.graphics.getWidth();
+		alturaDispositivo = Gdx.graphics.getHeight();
+		posicaoInicialVerticalPassaro = alturaDispositivo / 2;
 
 	}
 
@@ -33,13 +45,29 @@ public class Jogo extends ApplicationAdapter {
 		//informa para renderizar o item dentro da tela do celular.
 		batch.begin();
 
-		batch.draw(fundo, 0, 0, 0, 0); //desenha o objeto.
+		if(variacao > 3)
+			variacao = 0;
+		boolean toqueTela = Gdx.input.justTouched();
+		if (Gdx.input.justTouched()){
+			gravidade = -25;
+		}
+		if (posicaoInicialVerticalPassaro > 0 || toqueTela)
+			posicaoInicialVerticalPassaro = posicaoInicialVerticalPassaro - gravidade;
+		batch.draw(fundo,0,0,larguraDispositivo,alturaDispositivo);
+		batch.draw(passaros[(int)variacao],30,posicaoInicialVerticalPassaro);
+
+		variacao += Gdx.graphics.getDeltaTime() * 10;
+
+		gravidade++;
+		movimentaX++; //eixo X.
+		movimentaY++; //eixo Y.
+		batch.end(); //encerra o processo.
+
+
+		//batch.draw(fundo, 0, 0, 0, 0); //desenha o objeto.
 		//batch.draw(passaro, movimentaX ,movimentaY, 0,0);
 
 
-		movimentaX++; //eixo X.
-		//movimentaY++; //eixo Y.
-		batch.end(); //encerra o processo.
 	}
 	
 	@Override
