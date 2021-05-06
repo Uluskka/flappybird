@@ -23,8 +23,8 @@ public class Jogo extends ApplicationAdapter {
 		fundo = new Texture("fundo.png"); //informa o item fundo.png.
 		passaro = new Texture("passaro1.png");//informa o passaro.png
 
-		larguraDispositivo = Gdx.graphics.getWidth();
-		alturaDispositivo = Gdx.graphics.getHeight();
+		//larguraDispositivo = Gdx.graphics.getWidth();
+		//alturaDispositivo = Gdx.graphics.getHeight();
 
 	}
 
@@ -33,8 +33,8 @@ public class Jogo extends ApplicationAdapter {
 		//informa para renderizar o item dentro da tela do celular.
 		batch.begin();
 
-		batch.draw(fundo, 0, 0, larguraDispositivo, alturaDispositivo); //desenha o objeto.
-		batch.draw(passaro, movimentaX, movimentaY);
+		batch.draw(fundo, 0, 0, 0, 0); //desenha o objeto.
+		//batch.draw(passaro, movimentaX ,movimentaY, 0,0);
 
 
 		movimentaX++; //eixo X.
