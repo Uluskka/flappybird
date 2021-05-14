@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import javax.xml.soap.Text;
+
 public class Jogo extends ApplicationAdapter {
 
 	private  float larguraDispositivo;
@@ -13,15 +15,17 @@ public class Jogo extends ApplicationAdapter {
 	private float posicaoInicialVerticalPassaro = 0;
 	private float gravidade = 0;
 	private  float variacao = 0;
+	private Texture canoBaixo;
+	private  Texture canoTopo;
 
-
+	private  float posicaoCano;
 	private int movimentaY = 0;
 	private int movimentaX = 0;
 	private Texture[]passaros;
 	private Texture fundo;
 	private SpriteBatch batch;
 
-	
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -37,6 +41,10 @@ public class Jogo extends ApplicationAdapter {
 		larguraDispositivo = Gdx.graphics.getWidth();
 		alturaDispositivo = Gdx.graphics.getHeight();
 		posicaoInicialVerticalPassaro = alturaDispositivo / 2;
+
+		posicaoCano = alturaDispositivo /2;
+		canoBaixo = new Texture("cano_baixo.png");
+		canoTopo = new Texture("Cano_topo.png");
 
 	}
 
@@ -55,6 +63,8 @@ public class Jogo extends ApplicationAdapter {
 			posicaoInicialVerticalPassaro = posicaoInicialVerticalPassaro - gravidade;
 		batch.draw(fundo,0,0,larguraDispositivo,alturaDispositivo);
 		batch.draw(passaros[(int)variacao],30,posicaoInicialVerticalPassaro);
+		batch.draw(canoBaixo, posicaoCano, 0);
+		batch.draw(canoTopo, posicaoCano, alturaDispositivo/2);
 
 		variacao += Gdx.graphics.getDeltaTime() * 10;
 
@@ -69,7 +79,7 @@ public class Jogo extends ApplicationAdapter {
 
 
 	}
-	
+
 	@Override
 	public void dispose () {
 
