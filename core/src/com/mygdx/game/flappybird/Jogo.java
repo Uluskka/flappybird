@@ -203,6 +203,7 @@ public class Jogo extends ApplicationAdapter {
 		batch.draw(canoTopo, posicaoCanoHorizontal, alturaDispositivo / 2 + espacoEntreCanos / 2 + posicaoCanoVertical);
 		textoPontucao.draw(batch, String.valueOf(pontos), larguraDispositivo / 2, alturaDispositivo -100);
 
+		//informa na tela o game over, melhor pontuacao e a opacao de reiniciar o game.
 		if (estadoJogo == 2){
 			batch.draw(gameOver, larguraDispositivo / 2 - gameOver.getWidth() / 2, alturaDispositivo / 2);
 			textoReiniciar.draw(batch, "TOQUE NA TELA PARA REINICIAR!", larguraDispositivo / 2 -200,
